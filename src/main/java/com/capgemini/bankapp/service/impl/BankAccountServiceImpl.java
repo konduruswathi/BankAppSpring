@@ -1,14 +1,24 @@
 package com.capgemini.bankapp.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.capgemini.bankapp.exceptions.LowBalanceException;
 import com.capgemini.bankapp.repository.BankAccounRepository;
 import com.capgemini.bankapp.service.BankAccountService;
-
+@Service
 public class BankAccountServiceImpl implements BankAccountService {
 	
 private BankAccounRepository  bankAccountRepository;
 
-public void setBankAccountRepository(BankAccounRepository bankAccountRepository) {
+//public void setBankAccountRepository(BankAccounRepository bankAccountRepository) {
+	//this.bankAccountRepository = bankAccountRepository;
+//}
+
+	@Autowired
+
+	private BankAccountServiceImpl(BankAccounRepository bankAccountRepository) {
+	super();
 	this.bankAccountRepository = bankAccountRepository;
 }
 	@Override
@@ -16,7 +26,7 @@ public void setBankAccountRepository(BankAccounRepository bankAccountRepository)
 		
 		return bankAccountRepository.getBalance(accountId);
 	}
-
+	
 	@Override
 	public double withdraw(long accountId, double amount) throws LowBalanceException {
 		
